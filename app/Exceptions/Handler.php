@@ -41,8 +41,23 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (Throwable $exception) {
+            if (request()->is('api*')) {
+                if ($exception instanceof ModelNotFoundException) {
+                    return response()->json(['error' => 'Recurso no encontrado'], 404);
+                }
+                else if($exception instanceof NotFoundHttpException) {
+                    return response()->json(['error' => 'Recurso no encontrado'], 404);
+                }
+                //este con el isset va delante del ValidationException
+                else if (isset($exception))
+                    return response()->json(['error' => 'Error: ' . $exception->getMessage()], 500);
+                else if ($exception instanceof ValidationException)
+                    return response()->json(['error' => 'Datos no válidos'], 400);
+                else if ($exception instanceof AuthenticationException) {
+                    return response()->json(['error' => 'Usuario no autenticado'], 401);
+                }
+            }
         });
     }
 }

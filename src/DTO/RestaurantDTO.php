@@ -1,21 +1,27 @@
 <?php
-namespace Renfe\DTO;
+namespace FastFood\DTO;
 
-class PasajeroDTO implements \JsonSerializable{
+class RestaurantDTO implements \JsonSerializable{
 
     private ?int $id;
 
     private string $name;
 
+    private string $cadena;
+
+    private int $client_id;
 
     /**
      * @param int $id
      * @param string $name
+     * @param string $cadena
+     * @param int $client_id
      */
-    public function __construct(?int $id, string $name){
+    public function __construct(?int $id, string $name, string $cadena, int $client_id){
         $this->id = $id;
         $this->name = $name;
-
+        $this->cadena = $cadena;
+        $this->client_id = $client_id;
     }
 
     public function getId():int{
@@ -26,7 +32,13 @@ class PasajeroDTO implements \JsonSerializable{
         return $this->name;
     }
 
+    public function getCadena():string{
+        return $this->cadena;
+    }
 
+    public function getClient_id(){
+        return $this->client_id;
+    }
 
     /**
 	 * Specify data which should be serialized to JSON
@@ -37,6 +49,8 @@ class PasajeroDTO implements \JsonSerializable{
         return [
 			'id' => $this->id,
 			'name' => $this->name,
+			'cadena' => $this->cadena,
+            'client_id' => $this->client_id
 		];
 	}
 }
