@@ -49,7 +49,6 @@ class Handler extends ExceptionHandler
                 else if($exception instanceof NotFoundHttpException) {
                     return response()->json(['error' => 'Recurso no encontrado'], 404);
                 }
-                //este con el isset va delante del ValidationException
                 else if (isset($exception))
                     return response()->json(['error' => 'Error: ' . $exception->getMessage()], 500);
                 else if ($exception instanceof ValidationException)

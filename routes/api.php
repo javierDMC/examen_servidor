@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProviderController;
-use App\Http\Controllers\RestaurantController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\loginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +21,13 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::apiResource('clients', ClientController::class);
-Route::apiResource('providers', ProviderController::class);
-Route::apiResource('restaurants', RestaurantController::class);
+Route::get('games', [GameController::class, 'index']);
+Route::get('games/{id}', [GameController::class, 'show']);
+Route::post('games', [GameController::class, 'store']);
+Route::put('games/{id}', [GameController::class, 'update']);
+Route::delete('games/{id}', [GameController::class, 'destroy']);
 
-Route::get('restaurants/{id}/clients', [RestaurantController::class, 'getClientesRestaurante']);
+Route::get('developers/{id}/games', [GameController::class, 'getCharactersGame']);
 
-Route::post('login', [LoginController::class, 'login']);
+Route::post('login', [loginController::class, 'login']);
 
