@@ -48,7 +48,7 @@ class EloquentGameDAO implements GameDAO{
         $game->title = $gameDto->getTitle();
         $game->year = $gameDto->getYear();
         $game->save();
-        return new GameDTO($game->id, $game->title, $game->year, $game->character_id);
+        return new GameDTO($game->id, $game->title, $game->year, $game->developer_id);
 
     }
 

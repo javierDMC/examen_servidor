@@ -1,6 +1,7 @@
 <?php
 namespace Daw\services\impl;
 
+use Daw\DAO\GameDAO;
 use Daw\DTO\GameDTO;
 use Daw\services\GameService;
 use Daw\DAO\impl\EloquentGameDAO;
